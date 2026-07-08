@@ -20,6 +20,7 @@
         <option value="$PROJECT_DIR$/mcp-server-streamable/pom.xml" />
         <option value="$PROJECT_DIR$/mcp/mcp-server-studio/pom.xml" />
         <option value="$PROJECT_DIR$/mcp/mcp-server-streamable/pom.xml" />
+        <option value="$PROJECT_DIR$/rag/pom.xml" />
       </list>
     </option>
   </component>

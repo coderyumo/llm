@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: LLMentor_RAG
+  ai:
+    dashscope:
+      api-key: sk-ws-H.REHIDMR.CNbB.MEUCICLPGNjORqo690TPxr5hdFwUhFdIQek0Wz3lakGdPKZvAiEAnaolf593IuZY27Wo0PcTkFjJO8FjmXU7El9hdGtovLk
+      embedding:
+        options:
+          model: text-embedding-v4
+          dimensions: 768
+  datasource:
+    url: jdbc:postgresql://localhost:5433/rag_test # 记得改成你自己的
+    username: root # 记得改成你自己的
+    password: 123456 # 记得改成你自己的
+server:
+  port: 8001
