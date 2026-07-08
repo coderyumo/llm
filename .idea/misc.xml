@@ -10,6 +10,16 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/spring-ai/pom.xml" />
         <option value="$PROJECT_DIR$/function-call/pom.xml" />
+        <option value="$PROJECT_DIR$/mcp/pom.xml" />
+        <option value="$PROJECT_DIR$/mcp/mcp-client/pom.xml" />
+        <option value="$PROJECT_DIR$/mcp-sse/pom.xml" />
+        <option value="$PROJECT_DIR$/mcp-server-sse-https/pom.xml" />
+        <option value="$PROJECT_DIR$/mcp/mcp-server-sse/pom.xml" />
+        <option value="$PROJECT_DIR$/mcp-server-studio/pom.xml" />
+        <option value="$PROJECT_DIR$/mcp/mcp-server-sse-https/pom.xml" />
+        <option value="$PROJECT_DIR$/mcp-server-streamable/pom.xml" />
+        <option value="$PROJECT_DIR$/mcp/mcp-server-studio/pom.xml" />
+        <option value="$PROJECT_DIR$/mcp/mcp-server-streamable/pom.xml" />
       </list>
     </option>
   </component>
