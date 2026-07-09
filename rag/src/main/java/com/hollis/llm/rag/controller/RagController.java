@@ -2,6 +2,7 @@ package com.hollis.llm.rag.controller;
 
 import com.hollis.llm.rag.cleaner.DocumentCleaner;
 import com.hollis.llm.rag.reader.DocumentReaderFactory;
+import com.hollis.llm.rag.splitter.OverlapParagraphTextSplitter;
 import org.springframework.ai.document.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,7 @@ import java.util.List;
 public class RagController {
 
     @Autowired
-    private DocumentReaderFactory selector;
+    private DocumentReaderFactory documentReaderFactory;
 
 
     /**
@@ -36,11 +37,43 @@ public class RagController {
             throw new IllegalArgumentException("文件不存在或不是有效文件: " + path);
         }
         try {
-            List<Document> documents = selector.read(file);
+            List<Document> documents = documentReaderFactory.read(file);
             return DocumentCleaner.cleanDocuments(documents);
         } catch (IOException e) {
             throw new RuntimeException("读取文件失败: " + e.getMessage(), e);
         }
+    }
+
+
+    /**
+     * 读取文件
+     */
+    @GetMapping("/chunker")
+    public String chunker(@RequestParam("path") String path) {
+        File file = new File(path);
+        List<Document> documents;
+        if (!file.exists() || !file.isFile()) {
+            throw new IllegalArgumentException("文件不存在或不是有效文件: " + path);
+        }
+        try {
+            documents = DocumentCleaner.cleanDocuments(documentReaderFactory.read(new File(path)));
+            for (Document document : documents) {
+                System.out.println("before chunk : " + document.getText());
+                System.out.println("=================");
+                OverlapParagraphTextSplitter tokenTextSplitter = new OverlapParagraphTextSplitter(
+                        100,
+                        5
+                );
+                List<Document> documentList = tokenTextSplitter.split(document);
+                for (Document document1 : documentList) {
+                    System.out.println("after chunk : " + document1.getText());
+                }
+                System.out.println("=================");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("读取文件失败: " + e.getMessage(), e);
+        }
+        return "success";
     }
 
 }

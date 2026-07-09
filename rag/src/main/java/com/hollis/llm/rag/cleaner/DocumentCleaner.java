@@ -2,7 +2,9 @@ package com.hollis.llm.rag.cleaner;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,4 +56,28 @@ public class DocumentCleaner {
                 .collect(Collectors.toList());
     }
 
+
+    /**
+     * 文档分片
+     */
+    public List<Document> split(List<Document> documents) {
+        if (CollectionUtils.isEmpty(documents)) {
+            return Collections.emptyList();
+        }
+
+        TokenTextSplitter splitter = new TokenTextSplitter(
+                // 每块最多 600 tokens
+                600,
+                // 每块至少 400 字符再考虑断点
+                300,
+                // 太短的不做嵌入
+                5,
+                // 最多拆分8000块
+                8000,
+                // 保留句号、换行符
+                true
+        );
+
+        return splitter.apply(documents);
+    }
 }
