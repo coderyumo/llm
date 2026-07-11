@@ -8,9 +8,24 @@ spring:
         options:
           model: text-embedding-v4
           dimensions: 768
+    vectorstore:
+      pgvector:
+        # 向量索引类型
+        index-type: HNSW
+        # 距离度量，余弦值
+        distance-type: COSINE_DISTANCE
+        # 向量维度
+        dimensions: 768
+        # 批量处理大小
+        max-document-batch-size: 9
+        # 启动时是否自动创建表
+        initialize-schema: true
+        # 创建的表名
+        table-name: vector_st
   datasource:
-    url: jdbc:postgresql://localhost:5433/rag_test # 记得改成你自己的
-    username: root # 记得改成你自己的
-    password: 123456 # 记得改成你自己的
+    url: jdbc:postgresql://192.168.8.131:5433/rag_test # 记得改成你自己的
+    username: pgvector # 记得改成你自己的
+    password: pgvector # 记得改成你自己的
+
 server:
   port: 8001
