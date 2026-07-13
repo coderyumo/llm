@@ -44,6 +44,12 @@ public class EmbeddingService {
     private static final int DEFAULT_TOP_K = 5;
     private static final double DEFAULT_SIMILARITY_THRESHOLD = 0.5;
 
+    /**
+     * 相似度查询
+     *
+     * @param query
+     * @return
+     */
     public List<Document> similaritySearch(String query) {
         return vectorStore.similaritySearch(SearchRequest
                 .builder()
