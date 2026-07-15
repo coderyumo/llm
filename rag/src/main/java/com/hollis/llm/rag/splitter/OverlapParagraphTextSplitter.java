@@ -9,17 +9,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @description:
- * @author: <a href="https://github.com/coderyumo">程序员雨墨</a>
- * @create: 2026-07-09 15:54
- **/
 public class OverlapParagraphTextSplitter extends TextSplitter {
+
     // 每块最大字符数
-    private final int chunkSize;
+    protected final int chunkSize;
 
     // 相邻块之间重叠字符数
-    private final int overlap;
+    protected final int overlap;
 
     public OverlapParagraphTextSplitter(int chunkSize, int overlap) {
         if (chunkSize <= 0) {
@@ -35,7 +31,7 @@ public class OverlapParagraphTextSplitter extends TextSplitter {
         this.overlap = overlap;
     }
 
-    public List<String> splitText(String text) {
+    protected List<String> splitText(String text) {
         if (StringUtils.isBlank(text)) return Collections.emptyList();
 
         String[] paragraphs = text.split("\\n+");
@@ -50,7 +46,6 @@ public class OverlapParagraphTextSplitter extends TextSplitter {
                 int remainingSpace = chunkSize - currentChunk.length();
                 int end = Math.min(start + remainingSpace, paragraph.length());
 
-//                if (currentChunk.length() > 0) currentChunk.append("\n");
                 currentChunk.append(paragraph, start, end);
 
                 // 如果当前块已满，保存并生成新块
