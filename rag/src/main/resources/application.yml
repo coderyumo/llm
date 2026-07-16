@@ -23,10 +23,17 @@ spring:
         # 创建的表名
         table-name: vector_st
   datasource:
-    url: jdbc:postgresql://192.168.8.133:5433/rag_test # 记得改成你自己的
+    url: jdbc:postgresql://192.168.8.134:5433/rag_test # 记得改成你自己的
     username: pgvector # 记得改成你自己的
     password: pgvector # 记得改成你自己的
+
   elasticsearch:
-    uris: http://192.168.8.133:9200
+    uris: http://192.168.8.134:9200
+
+  neo4j:
+    uri: bolt://192.168.8.134:7687
+    authentication:
+      username: neo4j
+      password: neo4j666
 server:
   port: 8001
