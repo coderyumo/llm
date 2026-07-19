@@ -35,5 +35,13 @@ spring:
     authentication:
       username: neo4j
       password: neo4j666
+
+minio:
+  url: http://192.168.8.134:9000 # 记得改成你自己的
+  accessKey: minioadmin # 记得改成你自己的
+  secretKey: minioadmin # 记得改成你自己的
+  bucketName: rag-test # 记得改成你自己的
+  endpoint: http://192.168.8.134:9000 # 记得改成你自己的
+
 server:
   port: 8001
