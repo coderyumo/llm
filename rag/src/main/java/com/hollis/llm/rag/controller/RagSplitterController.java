@@ -3,6 +3,8 @@ package com.hollis.llm.rag.controller;
 import com.alibaba.cloud.ai.transformer.splitter.RecursiveCharacterTextSplitter;
 import com.hollis.llm.rag.cleaner.DocumentCleaner;
 import com.hollis.llm.rag.reader.DocumentReaderFactory;
+import com.hollis.llm.rag.reader.PdfMultimodalProcessor;
+import com.hollis.llm.rag.splitter.ModalTextSplitter;
 import com.hollis.llm.rag.splitter.OverlapParagraphTextSplitter;
 import dev.langchain4j.data.document.splitter.DocumentBySentenceSplitter;
 import org.springframework.ai.document.Document;
@@ -108,6 +110,24 @@ public class RagSplitterController {
         }
         return "success";
     }
+
+    @Autowired
+    private PdfMultimodalProcessor processor;
+
+    @RequestMapping("/multiModel")
+    public String multiModel(String filePath) throws Exception {
+        String result = processor.processPdf(new File(filePath));
+        ModalTextSplitter modalTextSplitter = new ModalTextSplitter(300, 20);
+        List<Document> documentList = modalTextSplitter.split(new Document(result));
+        for (Document document : documentList) {
+            System.out.println(document.getText());
+            System.out.println(document.getMetadata());
+            System.out.println("=================");
+        }
+
+        return "success";
+    }
+
 
     public static void main(String[] args) {
         RecursiveCharacterTextSplitter splitter = new RecursiveCharacterTextSplitter(100);
